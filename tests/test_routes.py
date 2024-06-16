@@ -24,6 +24,8 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -37,10 +39,10 @@ class TestAccountService(TestCase):
         init_db(app)
         talisman.force_https = False
 
-
     @classmethod
     def tearDownClass(cls):
         """Runs once before test suite"""
+        pass
 
     def setUp(self):
         """Runs before each test"""
@@ -126,7 +128,6 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    # ADD YOUR TEST CASES HERE ...
     def test_get_account(self):
         """It should Read a single Account"""
         account = self._create_accounts(1)[0]
@@ -170,7 +171,7 @@ class TestAccountService(TestCase):
         account = self._create_accounts(1)[0]
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
-    
+
     def test_method_not_allowed(self):
         """It should not allow an illegal method call"""
         resp = self.client.delete(BASE_URL)
